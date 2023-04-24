@@ -1,19 +1,32 @@
 #!/usr/bin/python3
-"""Exports to-do list information for a given employee ID to JSON format."""
+""" using this REST API, for a given employee ID,
+returns information about his/her TODO list progress."""
+
 import json
 import requests
 import sys
 
 if __name__ == "__main__":
-    user_id = sys.argv[1]
-    url = "https://jsonplaceholder.typicode.com/"
-    user = requests.get(url + "users/{}".format(user_id)).json()
-    username = user.get("username")
-    todos = requests.get(url + "todos", params={"userId": user_id}).json()
+    text = "https://jsonplaceholder.typicode.com/users/" + sys.argv[1]
+    user_req = requests.get(text)
+    to_do = requests.get(text + "/todos")
+    list_to_do = to_do.json()
+    user = user_req.json()
+    list_done = []
+    for element in list_to_do:
+        if element.get('userId') == int(sys.argv[1]):
+            tuple_final = (sys.argv[1], user.get('username'),
+                           element.get('completed'), element.get('title'))
+            list_done.append(tuple_final)
 
-    with open("{}.json".format(user_id), "w") as jsonfile:
-        json.dump({user_id: [{
-                "task": t.get("title"),
-                "completed": t.get("completed"),
-                "username": username
-            } for t in todos]}, jsonfile)
+    list_dict = []
+    for element in list_done:
+        dict_list = {}
+        dict_list["task"] = element[3]
+        dict_list["completed"] = element[2]
+        dict_list["username"] = element[1]
+        list_dict.append(dict_list)
+    dict_final = {sys.argv[1]: list_dict}
+
+    with open(sys.argv[1]+'.json', 'w') as f:
+        json.dump(dict_final, f)
