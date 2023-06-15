@@ -33,8 +33,7 @@ All of the following folders are projects done during the studies:
 | [`Attack Is The Best Defense`](https://github.com/aysuarex/alx-system_engineering-devops/tree/master/attack_is_the_best_defense) | ..  |
 
 ## Author :
-* **[Suara Ayomide](https://twitter.com/Aysuarex)** <[Aysuarex](https://github.com/Aysuarex)>
-
+* *
 ## Acknowledgements :pray:
 
 All work contained in this project was completed as part of the curriculum for the ALX-SE programme. ALX Africa is an online full-stack software engineering program that prepares students for careers in the tech industry using project-based peer learning. For more information, visit [this link](https://www.alxafrica.com//):
